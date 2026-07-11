@@ -1,0 +1,21 @@
+### IntelliJ IDEA ###
+.idea/
+*.iml
+out/
+
+### Maven ###
+target/
+
+### Gradle ###
+.gradle/
+build/
+
+### Arquivos compilados ###
+*.class
+
+### Logs ###
+*.log
+
+### Sistema operacional ###
+.DS_Store
+Thumbs.db
