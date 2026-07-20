@@ -1,4 +1,4 @@
-package br.com.devfred.aula5.desafiofinal.integration,
+package br.com.devfred.aula5.desafiofinal.integration;
 
 public record ViaCepDto(
         String cep,
