@@ -8,11 +8,12 @@ import br.com.devfred.aula5.desafiofinal.service.BuscadorCepService;
 import br.com.devfred.aula5.desafiofinal.view.TerminalView;
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.net.http.HttpClient;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         ConfigurationLoader configurationLoader = new ConfigurationLoader();
 
@@ -24,9 +25,9 @@ public class Main {
         Gson gson = new Gson();
         ConversonJson conversonJson = new ConversonJson(gson);
 
-        EscritorArquivoEndereco escritorArquivoEndereco = new EscritorArquivoEndereco();
+        EscritorArquivoEndereco escritorArquivoEndereco = new EscritorArquivoEndereco(conversonJson, configurationLoader.getDiretorioDeSaida());
 
-        BuscadorCepService buscadorCepService = new BuscadorCepService();
+        BuscadorCepService buscadorCepService = new BuscadorCepService(viaCepClient, conversonJson, escritorArquivoEndereco);
 
         Scanner sc = new Scanner(System.in);
         TerminalView terminalView = new TerminalView(sc, buscadorCepService);

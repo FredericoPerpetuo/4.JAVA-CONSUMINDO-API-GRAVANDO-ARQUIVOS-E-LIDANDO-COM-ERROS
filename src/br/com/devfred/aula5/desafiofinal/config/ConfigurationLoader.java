@@ -11,6 +11,7 @@ public class ConfigurationLoader {
     private final String urlBase;
     private final Duration connectTimeout;
     private final Duration readTimeout;
+    private final String diretorioDeSaida;
 
     public ConfigurationLoader() {
         Properties properties = new Properties();
@@ -20,6 +21,7 @@ public class ConfigurationLoader {
             this.urlBase = properties.getProperty("url.base");
             this.connectTimeout = Duration.ofSeconds(Integer.parseInt(properties.getProperty("timeout.connect.seconds")));
             this.readTimeout = Duration.ofSeconds(Integer.parseInt(properties.getProperty("timeout.read.seconds")));
+            this.diretorioDeSaida = properties.getProperty("output.data");
         } catch (IOException e) {
             throw new FalhaConfiguracaoException("Falha ao carregar configurações: " + e.getMessage());
         }
@@ -35,5 +37,9 @@ public class ConfigurationLoader {
 
     public Duration getReadTimeout() {
         return readTimeout;
+    }
+
+    public String getDiretorioDeSaida(){
+        return diretorioDeSaida;
     }
 }

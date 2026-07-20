@@ -19,3 +19,7 @@ build/
 ### Sistema operacional ###
 .DS_Store
 Thumbs.db
+
+### Aplicacao ###
+diretorio_saida/
+*.json

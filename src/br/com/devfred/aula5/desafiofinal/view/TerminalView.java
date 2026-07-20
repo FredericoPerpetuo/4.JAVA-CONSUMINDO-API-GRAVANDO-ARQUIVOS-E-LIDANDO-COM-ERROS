@@ -2,6 +2,7 @@ package br.com.devfred.aula5.desafiofinal.view;
 
 import br.com.devfred.aula5.desafiofinal.service.BuscadorCepService;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class TerminalView {
@@ -14,12 +15,13 @@ public class TerminalView {
         this.buscadorCepService = buscadorCepService;
     }
 
-    public void iniciarLoop(){
+    public void iniciarLoop() throws IOException, InterruptedException {
         int opcao = 0;
         while(opcao != 3){
             exibirOpcoes();
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
+            scanner.nextLine();//limpeza de buffer
             processarOpcao(opcao);
         }
     }
@@ -34,10 +36,12 @@ public class TerminalView {
 
     }
 
-    private void processarOpcao(int opcao){
+    private void processarOpcao(int opcao) throws IOException, InterruptedException {
         switch(opcao){
             case 1:
-                System.out.println("Escolheu opção 1\n");
+                System.out.print("Digite o cep a ser buscado: ");
+                String cep = scanner.nextLine();
+                buscadorCepService.buscaCep(cep);
                 break;
             case 2:
                 System.out.println("Escolheu opção 2\n");
