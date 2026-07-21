@@ -1,5 +1,6 @@
 package br.com.devfred.aula5.desafiofinal.parser;
 
+import br.com.devfred.aula5.desafiofinal.exception.CepNaoEncontradoException;
 import br.com.devfred.aula5.desafiofinal.integration.ViaCepDto;
 import br.com.devfred.aula5.desafiofinal.model.Endereco;
 import com.google.gson.Gson;
@@ -15,7 +16,13 @@ public class ConversonJson {
     }
 
     public ViaCepDto converteJsonParaViaCepDto(String json){
-        return gson.fromJson(json, ViaCepDto.class);
+        ViaCepDto viaCepDto = gson.fromJson(json, ViaCepDto.class);
+        if(viaCepDto.erro() == true){
+            throw new CepNaoEncontradoException("O cep não foi encontrado ou não existe");
+        }else{
+            return viaCepDto;
+        }
+
     }
 
     public String converteEnderecoParaJsonFormatado(Endereco endereco){

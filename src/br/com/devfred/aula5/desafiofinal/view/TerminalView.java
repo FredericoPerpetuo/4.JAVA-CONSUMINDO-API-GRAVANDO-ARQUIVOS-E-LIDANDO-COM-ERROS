@@ -1,5 +1,7 @@
 package br.com.devfred.aula5.desafiofinal.view;
 
+import br.com.devfred.aula5.desafiofinal.exception.CepInvalidoException;
+import br.com.devfred.aula5.desafiofinal.exception.CepNaoEncontradoException;
 import br.com.devfred.aula5.desafiofinal.service.BuscadorCepService;
 
 import java.io.IOException;
@@ -36,12 +38,10 @@ public class TerminalView {
 
     }
 
-    private void processarOpcao(int opcao) throws IOException, InterruptedException {
+    private void processarOpcao(int opcao)  {
         switch(opcao){
             case 1:
-                System.out.print("Digite o cep a ser buscado: ");
-                String cep = scanner.nextLine();
-                buscadorCepService.buscaCep(cep);
+                getEndereco();
                 break;
             case 2:
                 System.out.println("Escolheu opção 2\n");
@@ -53,5 +53,16 @@ public class TerminalView {
                 System.out.println("Opção inválida");
                 break;
         }
+    }
+
+    private void getEndereco(){
+        System.out.print("Digite o cep a ser buscado: ");
+        String cep = scanner.nextLine();
+        try{
+            buscadorCepService.buscaCep(cep);
+        }catch(IOException | InterruptedException | CepInvalidoException | CepNaoEncontradoException e){
+            System.out.println(e.getMessage());
+        }
+
     }
 }
