@@ -41,7 +41,7 @@ public class TerminalView {
     private void processarOpcao(int opcao)  {
         switch(opcao){
             case 1:
-                getEndereco();
+                buscaEndereco();
                 break;
             case 2:
                 System.out.println("Escolheu opção 2\n");
@@ -55,7 +55,7 @@ public class TerminalView {
         }
     }
 
-    private void getEndereco(){
+    private void buscaEndereco(){
         System.out.print("Digite o cep a ser buscado: ");
         String cep = scanner.nextLine();
         try{
