@@ -2,9 +2,11 @@ package br.com.devfred.aula5.desafiofinal.view;
 
 import br.com.devfred.aula5.desafiofinal.exception.CepInvalidoException;
 import br.com.devfred.aula5.desafiofinal.exception.CepNaoEncontradoException;
+import br.com.devfred.aula5.desafiofinal.exception.LogradouroInvalidoException;
 import br.com.devfred.aula5.desafiofinal.service.BuscadorCepService;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class TerminalView {
@@ -41,10 +43,10 @@ public class TerminalView {
     private void processarOpcao(int opcao)  {
         switch(opcao){
             case 1:
-                buscaEndereco();
+                buscaEnderecoCep();
                 break;
             case 2:
-                System.out.println("Escolheu opção 2\n");
+                buscaEnderecoLogradouro();
                 break;
             case 3:
                 System.out.println("Obrigado por utilizar nosso sistema\n");
@@ -55,7 +57,7 @@ public class TerminalView {
         }
     }
 
-    private void buscaEndereco(){
+    private void buscaEnderecoCep(){
         System.out.print("Digite o cep a ser buscado: ");
         String cep = scanner.nextLine();
         try{
@@ -63,6 +65,24 @@ public class TerminalView {
         }catch(IOException | InterruptedException | CepInvalidoException | CepNaoEncontradoException e){
             System.out.println(e.getMessage());
         }
+    }
 
+    private void buscaEnderecoLogradouro(){
+        System.out.print("Digite a UF: ");
+        String uf = scanner.nextLine();
+        System.out.print("Digite a cidade: ");
+        String cidade = scanner.nextLine();
+        System.out.print("Digite a rua: ");
+        String rua = scanner.nextLine();
+        try{
+          List<String> enderecosFormatados = buscadorCepService.buscaLogradouro(uf, cidade, rua);
+            if(enderecosFormatados.size() > 1){
+               for(String endereco : enderecosFormatados){
+                   System.out.println(endereco+"\n");
+               }
+            }
+        }catch(LogradouroInvalidoException | IOException | InterruptedException e){
+            System.out.println(e.getMessage());
+        }
     }
 }

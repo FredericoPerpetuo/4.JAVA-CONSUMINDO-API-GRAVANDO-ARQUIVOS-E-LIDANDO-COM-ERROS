@@ -11,15 +11,15 @@ import java.nio.file.StandardOpenOption;
 public class EscritorArquivoEndereco {
 
     private final ConversonJson conversonJson;
-    private final String direitoDeSaida;
+    private final String diretorioDeSaida;
 
-    public EscritorArquivoEndereco(ConversonJson conversonJson, String direitoDeSaida) {
+    public EscritorArquivoEndereco(ConversonJson conversonJson, String diretorioDeSaida) {
         this.conversonJson = conversonJson;
-        this.direitoDeSaida =direitoDeSaida;
+        this.diretorioDeSaida = diretorioDeSaida;
     }
 
     public void salvarEndereco(Endereco endereco){
-        Path diretorio = Path.of("enderecos_salvos");
+        Path diretorio = Path.of(System.getProperty("user.home"), diretorioDeSaida);
         Path arquivo = diretorio.resolve(endereco.cep() + ".json");
         try{
             Files.createDirectories(diretorio);
